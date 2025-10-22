@@ -1,0 +1,70 @@
+// Source code is decompiled from a .class file using FernFlower decompiler (from Intellij IDEA).
+import java.util.Scanner;
+
+public class Menu {
+   Scanner s;
+
+   public Menu() {
+      this.s = new Scanner(System.in);
+   }
+
+   public int getMenuChoice() {
+      System.out.println();
+      System.out.println("0. Exit");
+      System.out.println("1. Play");
+      System.out.println("2. Load");
+      System.out.println("3. Help");
+      return this.s.nextInt();
+   }
+
+   public void help() {
+      System.out.println("How to play the game...");
+      System.out.println();
+      System.out.println("To play type 1 and then type play to start playing Scribble.");
+      System.out.println("The first word always has to be play in the middle and be at least 2 letters long.");
+      System.out.println("All words have to be in the dictionary and not be outside of the board.");
+      System.out.println("They also have to have a letter that overlaps with a letter that is already on the board.");
+      System.out.println("The next player must then type play if they to continue playing.");
+      System.out.println();
+      System.out.println("If they type quit the game will save to a file and exit.");
+      System.out.println("You can always load the game by typing 2 in the menu.");
+      System.out.println();
+      System.out.println("Player get points based on the letter in the word they play.");
+      System.out.println("To win Scribble a player must get to a score of 100.");
+   }
+
+   public void displayMenu() {
+      Menu menu = new Menu();
+      Game game = new Game();
+
+      int menuChoice;
+      do {
+         menuChoice = menu.getMenuChoice();
+         switch (menuChoice) {
+            case 0:
+               System.out.println("Exiting the game.");
+               break;
+            case 1:
+               System.out.println("Starting game...");
+               game.gameLoop();
+               break;
+            case 2:
+               String fileName = "scribbleSave.txt";
+               game.loadGame(fileName);
+               break;
+            case 3:
+               System.out.println("Showing help...");
+               this.help();
+               break;
+            default:
+               System.out.println("Invalid choice. Please try again.");
+         }
+      } while(menuChoice != 0);
+
+   }
+
+   public static void main(String[] args) {
+      Menu menu = new Menu();
+      menu.displayMenu();
+   }
+}
